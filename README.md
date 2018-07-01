@@ -1,2 +1,3 @@
 # algorithm
-数据结构和算法，使用 C 语言实现，为便于组织代码，使用了少量的 C++ 语法
+
+Data-structures and algorithms in C

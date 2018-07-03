@@ -41,8 +41,6 @@ Position getPrevious(ElementType data, List header);
 
 Status insert(ElementType data, List list, int i);
 
-void deleteList(List l);
-
 Position header(List l);
 
 Position first(List l);
@@ -50,7 +48,6 @@ Position first(List l);
 Position advance(Position p);
 
 ElementType retrieve(Position p);
-
 
 #endif //ALGORITHMS_SINGLY_LINKED_LIST_H
 

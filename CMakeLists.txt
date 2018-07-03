@@ -8,4 +8,4 @@ add_executable(
         main.c
         data-structures/lists/linked-list/singly-linked-list/header/singly-linked-list.h
         data-structures/lists/linked-list/singly-linked-list/singly-linked-list.c
-)
+        data-structures/stack/header/stack.h data-structures/stack/stack.c)

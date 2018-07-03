@@ -11,19 +11,23 @@ typedef struct _Node
     struct _Node *next;
 } Node;
 
-typedef struct _Stack
+typedef struct _ChainStack
 {
     Node *top;
-} Stack;
+} ChainStack;
 
-void initStack(Stack *s);
+void initStack(ChainStack *s);
 
-int isStackFull(Stack *s);
+int isStackFull(ChainStack *s);
 
-int isStackEmpty(Stack *s);
+int isStackEmpty(ChainStack *s);
 
-void push(Stack *s, char c);
+void push(ChainStack *s, char c);
 
-char pop(Stack *s);
+char pop(ChainStack *s);
+
+void resetChainStack(ChainStack *s);
+
+void destroyChainStack(ChainStack *s);
 
 #endif //ALGORITHMS_CHAIN_STACK_H

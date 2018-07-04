@@ -5,7 +5,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "header/singly-linked-list.h"
+#include "../headers/list.h"
+
+struct Node;
+typedef struct Node *PtrToNode;
+typedef PtrToNode List;
+typedef PtrToNode Position;
 
 struct Node
 {

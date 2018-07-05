@@ -5,17 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../headers/list.h"
-
-#define INIT_SIZE 10            // 初始表空间大小
-#define INCREMENT_SIZE 5        // 空间分配增量
-
-struct _SeqList;
-typedef struct _SeqList SeqList;
-typedef ElementType *PtrToElementType;
-typedef PtrToElementType BaseAddress;
-typedef SeqList *PtrToSeqList;
-typedef PtrToSeqList List;
+#include "headers/sequential-list.h"
 
 struct _SeqList
 {

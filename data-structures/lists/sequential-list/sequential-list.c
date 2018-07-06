@@ -66,14 +66,7 @@ Status sl_ClearList(List L)
  */
 Status sl_isListEmpty(const SeqList L)
 {
-    if (L.length == 0)
-    {
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
+    return L.length == 0 ? TRUE : FALSE;
 }
 
 /**
@@ -87,9 +80,9 @@ int sl_GetListLen(const SeqList L)
 }
 
 /**
- * 获取指定位置的元素,索引从 1 开始
+ * 获取指定位置的元素,位置从 1 开始
  * @param element
- * @param i
+ * @param i i的取值范围：[1, L.length]
  * @param L
  * @return
  */
@@ -106,15 +99,9 @@ Status sl_GetElem(const SeqList L, int i, ElementType *elem)
 }
 
 /**
- * 比较两个元素大小
- * @param e1
- * @param e2
- */
-
-/**
  * 查找元素所在位置
  * @param L
- * @param e
+ * @param elem 所要查找的元素
  */
 Status sl_GetElemPos(const SeqList L, ElementType elem)
 {
@@ -142,11 +129,12 @@ Status sl_GetElemPos(const SeqList L, ElementType elem)
  */
 Status sl_GetPrevElem(const SeqList L, ElementType cur_e, ElementType *prev_e)
 {
-    int cur_e_pos = sl_GetElemPos(L, cur_e);
+    // 获取当前元素所在位置
+    int p = sl_GetElemPos(L, cur_e);
 
-    if (cur_e_pos && cur_e_pos != 1)
+    if (p && p != 1)
     {
-        *prev_e = L.base_addr[cur_e_pos - 2];
+        *prev_e = L.base_addr[(p - 1) - 1];
 
         return OK;
     }
@@ -159,8 +147,8 @@ Status sl_GetPrevElem(const SeqList L, ElementType cur_e, ElementType *prev_e)
 /**
  * 在指定位置插入元素
  * @param L
- * @param i
- * @param elem
+ * @param i 元素要插入的位置，位置范围：[1, L.length + 1]
+ * @param elem 要插入的元素
  */
 Status sl_InsertElem(SeqList *L, int i, ElementType elem)
 {
@@ -171,6 +159,7 @@ Status sl_InsertElem(SeqList *L, int i, ElementType elem)
         return ERROR;
     }
 
+    // 内存扩容
     if (L->length == L->size)
     {
         new_addr = (BaseAddress) realloc(L->base_addr, (L->size + INCREMENT_SIZE) * (sizeof(ElementType)));
@@ -184,9 +173,7 @@ Status sl_InsertElem(SeqList *L, int i, ElementType elem)
         L->size += INCREMENT_SIZE;
     }
 
-    /**
-     * 从 p 开始，将数值向后移动一个内存单元
-     */
+    // 从 p 开始，将数值向后移动一个内存单元
     ElementType *p = &L->base_addr[i - 1];
     ElementType *q = &L->base_addr[L->length - 1];
     for (; q >= p; q--)
@@ -203,7 +190,7 @@ Status sl_InsertElem(SeqList *L, int i, ElementType elem)
 /**
  * 删除指定位置的元素，并返回之
  * @param L
- * @param i
+ * @param i 取值范围：[1, L.length]
  * @param elem
  */
 Status sl_DeleteElem(SeqList *L, int i, ElementType *elem)

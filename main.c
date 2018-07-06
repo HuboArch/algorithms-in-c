@@ -6,5 +6,5 @@
  */
 int main()
 {
-    Test();
+    sl_TestSequentialList();
 }

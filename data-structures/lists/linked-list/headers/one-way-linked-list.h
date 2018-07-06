@@ -5,8 +5,6 @@
 #ifndef ALGORITHMS_ONE_WAY_LINKED_LIST_H
 #define ALGORITHMS_ONE_WAY_LINKED_LIST_H
 
-#define TRUE 1
-#define FALSE 0
 #define OK 1
 #define ERROR 0
 #define OVERFLOW (-2)
@@ -14,8 +12,9 @@
 typedef int ElementType;
 typedef int Status;
 
-struct Node;
-typedef struct Node *PtrToNode;
+struct _Node;
+typedef struct _Node Node;
+typedef Node *PtrToNode;
 typedef PtrToNode List;
 typedef PtrToNode Position;
 
@@ -27,7 +26,7 @@ void ssl_visitNode(ElementType data);
 
 void ssl_TraverseList(List header, void(*print)(ElementType));
 
-Status ssl_isListEmpty(List header);
+bool ssl_isListEmpty(List header);
 
 int ssl_GetLen(List header);
 

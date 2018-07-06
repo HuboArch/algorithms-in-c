@@ -4,21 +4,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "headers/one-way-linked-list.h"
 
-struct Node
+struct _Node
 {
     ElementType data;
     Position next;
 };
 
 /*
- * 初始化链式线性表
+ * 初始化链表
  */
 List ssl_InitList()
 {
-    List header = (List) malloc(sizeof(struct Node));
+    List header = (List) malloc(sizeof(Node));
     if (!header)
     {
         exit(OVERFLOW);
@@ -87,16 +88,11 @@ void ssl_TraverseList(List header, void(*print)(ElementType))
  * @param list
  * @return
  */
-Status ssl_isListEmpty(List header)
+bool ssl_isListEmpty(List header)
 {
-    if (header->next == NULL)
-    {
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
+    Position p = header->next;
+
+    return p == NULL;
 }
 
 /**

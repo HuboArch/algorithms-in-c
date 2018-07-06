@@ -24,32 +24,30 @@ typedef PtrToElementType BaseAddress;
 typedef SeqList *PtrToSeqList;
 typedef PtrToSeqList List;
 
-Status InitList(List L);
+Status sl_InitList(List L);
 
-Status DestroyList(List L);
+Status sl_DestroyList(List L);
 
-Status ClearList(List L);
+Status sl_ClearList(List L);
 
-Status isEmpty(SeqList L);
+Status sl_isListEmpty(SeqList L);
 
-int getLength(SeqList L);
+int sl_GetListLen(SeqList L);
 
-Status GetElem(SeqList L, int i, ElementType *elem);
+Status sl_GetElem(SeqList L, int i, ElementType *elem);
 
-int compare(ElementType e1, ElementType e2);
+Status sl_GetElemPos(SeqList L, ElementType e);
 
-Status FindElem(SeqList L, ElementType e, int(*compare)(ElementType, ElementType));
+Status sl_GetPrevElem(SeqList L, ElementType cur_e, ElementType *prev_e);
 
-Status PrevElem(SeqList L, ElementType cur_e, ElementType *prev_e);
+Status sl_InsertElem(SeqList *L, int i, ElementType elem);
 
-Status Insert(SeqList *L, int i, ElementType elem);
+Status sl_DeleteElem(SeqList *L, int i, ElementType *elem);
 
-Status Delete(SeqList *L, int i, ElementType *elem);
+void sl_visitElem(ElementType elem);
 
-void visit(ElementType elem);
+Status sl_TraverseList(SeqList L, void(*sl_visitElem)(ElementType));
 
-Status Traverse(SeqList L, void(*visit)(ElementType));
-
-void Test();
+void sl_TestSequentialList();
 
 #endif //ALGORITHMS_SEQUENTIAL_LIST_H

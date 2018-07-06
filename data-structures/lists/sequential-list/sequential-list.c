@@ -9,7 +9,7 @@
 
 struct _SeqList
 {
-    BaseAddress base_addr;    // 存储空间基址
+    BaseAddress base_addr;      // 存储空间基址
     int length;                 // 表长度
     int size;                   // 表空间大小
 };
@@ -19,7 +19,7 @@ struct _SeqList
  * @param L
  * @return
  */
-Status InitList(List L)
+Status sl_InitList(List L)
 {
     L->base_addr = (ElementType *) malloc(INIT_SIZE * sizeof(ElementType));
     if (!L->base_addr)
@@ -38,7 +38,7 @@ Status InitList(List L)
  * @param L
  * @return
  */
-Status DestroyList(List L)
+Status sl_DestroyList(List L)
 {
     free(L->base_addr);
     L->length = 0;
@@ -52,7 +52,7 @@ Status DestroyList(List L)
  * @param L
  * @return
  */
-Status ClearList(List L)
+Status sl_ClearList(List L)
 {
     L->length = 0;
 
@@ -64,7 +64,7 @@ Status ClearList(List L)
  * @param L
  * @return
  */
-Status isEmpty(const SeqList L)
+Status sl_isListEmpty(const SeqList L)
 {
     if (L.length == 0)
     {
@@ -81,7 +81,7 @@ Status isEmpty(const SeqList L)
  * @param L
  * @return
  */
-int getLength(const SeqList L)
+int sl_GetListLen(const SeqList L)
 {
     return L.length;
 }
@@ -93,7 +93,7 @@ int getLength(const SeqList L)
  * @param L
  * @return
  */
-Status GetElem(const SeqList L, int i, ElementType *elem)
+Status sl_GetElem(const SeqList L, int i, ElementType *elem)
 {
     if (i < 1 || i > L.length)
     {
@@ -109,42 +109,28 @@ Status GetElem(const SeqList L, int i, ElementType *elem)
  * 比较两个元素大小
  * @param e1
  * @param e2
- * @return
  */
-int compare(ElementType e1, ElementType e2)
-{
-    if (e1 == e2)
-    {
-        return 0;
-    }
-    else if (e1 < e2)
-    {
-        return -1;
-    }
-    else
-    {
-        return 1;
-    }
-}
 
 /**
  * 查找元素所在位置
  * @param L
  * @param e
- * @param compare
- * @return
  */
-Status FindElem(const SeqList L, ElementType e, int(*compare)(ElementType, ElementType))
+Status sl_GetElemPos(const SeqList L, ElementType elem)
 {
-    for (int i = 0; i < L.length; ++i)
+    int i;
+    for (i = 0; i < L.length; ++i)
     {
-        if (!(*compare)(L.base_addr[i], e))
+        if (L.base_addr[i] == elem)
         {
             return i + 1;
         }
     }
 
-    return ERROR;
+    if (i == L.length)
+    {
+        return ERROR;
+    }
 }
 
 /**
@@ -154,9 +140,9 @@ Status FindElem(const SeqList L, ElementType e, int(*compare)(ElementType, Eleme
  * @param prev_e
  * @return
  */
-Status PrevElem(const SeqList L, ElementType cur_e, ElementType *prev_e)
+Status sl_GetPrevElem(const SeqList L, ElementType cur_e, ElementType *prev_e)
 {
-    int cur_e_pos = FindElem(L, cur_e, compare);
+    int cur_e_pos = sl_GetElemPos(L, cur_e);
 
     if (cur_e_pos && cur_e_pos != 1)
     {
@@ -175,9 +161,8 @@ Status PrevElem(const SeqList L, ElementType cur_e, ElementType *prev_e)
  * @param L
  * @param i
  * @param elem
- * @return
  */
-Status Insert(SeqList *L, int i, ElementType elem)
+Status sl_InsertElem(SeqList *L, int i, ElementType elem)
 {
     ElementType *new_addr;
 
@@ -220,9 +205,8 @@ Status Insert(SeqList *L, int i, ElementType elem)
  * @param L
  * @param i
  * @param elem
- * @return
  */
-Status Delete(SeqList *L, int i, ElementType *elem)
+Status sl_DeleteElem(SeqList *L, int i, ElementType *elem)
 {
     if (i < 1 || i > L->length)
     {
@@ -247,7 +231,7 @@ Status Delete(SeqList *L, int i, ElementType *elem)
  * 打印元素
  * @param elem
  */
-void visit(ElementType elem)
+void sl_visitElem(ElementType elem)
 {
     printf("%d\n", elem);
 }
@@ -258,35 +242,35 @@ void visit(ElementType elem)
  * @param visit
  * @return
  */
-Status Traverse(const SeqList L, void(*visit)(ElementType))
+Status sl_TraverseList(const SeqList L, void(*sl_visitElem)(ElementType))
 {
     for (int i = 0; i < L.length; ++i)
     {
-        visit(L.base_addr[i]);
+        sl_visitElem(L.base_addr[i]);
     }
 
     return OK;
 }
 
 /**
- * 测试
+ * 测试顺序存储的线性表
  */
-void Test()
+void sl_TestSequentialList()
 {
 
     SeqList L;
-    if (InitList(&L))
+    if (sl_InitList(&L))
     {
         ElementType e;
         printf("init_success\n");
 
         for (int i = 0; i < 10; i++)
         {
-            Insert(&L, i + 1, i);
+            sl_InsertElem(&L, i + 1, i);
         }
-        printf("length is %d\n", getLength(L));
+        printf("length is %d\n", sl_GetListLen(L));
 
-        if (GetElem(L, 1, &e))
+        if (sl_GetElem(L, 1, &e))
         {
             printf("The first element is %d\n", e);
         }
@@ -295,7 +279,7 @@ void Test()
             printf("element is not exist\n");
         }
 
-        if (isEmpty(L))
+        if (sl_isListEmpty(L))
         {
             printf("list is empty\n");
         }
@@ -303,20 +287,21 @@ void Test()
         {
             printf("list is not empty\n");
         }
-        printf("The 5 at %d\n", FindElem(L, 5, compare));
+        printf("The 5 at %d\n", sl_GetElemPos(L, 5));
 
-        PrevElem(L, 6, &e);
+        sl_GetPrevElem(L, 6, &e);
         printf("The 6's previous element is %d\n", e);
 
 //        NextElem(L, 6, &e);
 //        printf("The 6's next element is %d\n", e);
 
-        Delete(&L, 1, &e);
+        sl_DeleteElem(&L, 1, &e);
         printf("delete first element is %d\n", e);
 
         printf("list:");
-        Traverse(L, visit);
-        if (DestroyList(&L))
+        sl_TraverseList(L, sl_visitElem);
+
+        if (sl_DestroyList(&L))
         {
             printf("\ndestroy_success\n");
         }

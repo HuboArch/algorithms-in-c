@@ -29,12 +29,12 @@ void ssl_TraverseList(List header, void(*print)(ElementType));
 
 Status ssl_isListEmpty(List header);
 
-int ssl_GetListLen(List header);
+int ssl_GetLen(List header);
 
 Position ssl_getNodeAddr(ElementType data, List header);
 
 Position ssl_getPrevNodeAddr(ElementType data, List header);
 
-void delete(ElementType data, List header);
+void ssl_DeleteNode(ElementType data, List header);
 
 #endif //ALGORITHMS_ONE_WAY_LINKED_LIST_H

@@ -104,7 +104,7 @@ Status ssl_isListEmpty(List header)
  * @param header
  * @return
  */
-int ssl_GetListLen(List header)
+int ssl_GetLen(List header)
 {
     int len = 0;
     Position p = header->next;
@@ -183,7 +183,7 @@ Position ssl_getPrevNodeAddr(ElementType data, List header)
  * @param header
  * @return
  */
-void ssl_DelNode(ElementType data, List header)
+void ssl_DeleteNode(ElementType data, List header)
 {
     Position cur_node = ssl_getNodeAddr(data, header);
 

@@ -20,6 +20,10 @@ typedef PtrToNode Position;
 
 List ssl_InitList();
 
+void ssl_DestroyList(Position *p);
+
+void ssl_ClearList(List header);
+
 Status ssl_InsertNode(ElementType data, List list, int i);
 
 void ssl_visitNode(ElementType data);

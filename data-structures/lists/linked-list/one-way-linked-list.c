@@ -30,6 +30,31 @@ List ssl_InitList()
 }
 
 /**
+ * 销毁链表
+ * @param p
+ */
+void ssl_DestroyList(Position *p)
+{
+    Position tmpCell;
+
+    while (*p)
+    {
+        tmpCell = (*p)->next;
+        free(*p);
+        *p = tmpCell;
+    }
+}
+
+/**
+ * 清空链表
+ * @param list
+ */
+void ssl_ClearList(List header)
+{
+
+}
+
+/**
  * 在指定位置插入元素
  * 除表头外的第一个结点的索引是 0
  * @param data 所插入结点数据域的值

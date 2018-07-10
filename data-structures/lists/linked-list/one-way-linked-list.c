@@ -8,7 +8,7 @@
 
 #include "headers/one-way-linked-list.h"
 
-struct _Node
+struct _ssl_Node
 {
     ElementType data;
     Position next;
@@ -19,7 +19,7 @@ struct _Node
  */
 List ssl_InitList()
 {
-    List header = (List) malloc(sizeof(Node));
+    List header = (List) malloc(sizeof(ssl_Node));
     if (!header)
     {
         exit(OVERFLOW);
@@ -34,14 +34,14 @@ List ssl_InitList()
  * 除表头外的第一个结点的索引是 0
  * @param data 所插入结点数据域的值
  * @param list 链表的地址
- * @param i    结点插入的索引位置 大于等于0 小于等于链表的长度
+ * @param i    结点插入的位置 取值范围：[1, list.length + 1]
  */
-Status ssl_InsertNode(ElementType data, List list, int i)
+Status ssl_InsertNode(ElementType data, List header, int i)
 {
     Position tmpCell;
-    List p = list;
+    Position p = header;
 
-    for (int j = 0; j < i; ++j)
+    for (int j = 1; j < i; ++j)
     {
         if (p != NULL)
         {
@@ -54,7 +54,7 @@ Status ssl_InsertNode(ElementType data, List list, int i)
         return ERROR;
     }
 
-    tmpCell = (List) malloc(sizeof(struct Node));
+    tmpCell = (List) malloc(sizeof(ssl_Node));
     tmpCell->data = data;
     tmpCell->next = p->next;
 
@@ -88,7 +88,7 @@ void ssl_TraverseList(List header, void(*print)(ElementType))
  * @param list
  * @return
  */
-bool ssl_isListEmpty(List header)
+bool ssl_isEmpty(List header)
 {
     Position p = header->next;
 

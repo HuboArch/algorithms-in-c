@@ -12,9 +12,9 @@
 typedef int ElementType;
 typedef int Status;
 
-struct _Node;
-typedef struct _Node Node;
-typedef Node *PtrToNode;
+struct _ssl_Node;
+typedef struct _ssl_Node ssl_Node;
+typedef ssl_Node *PtrToNode;
 typedef PtrToNode List;
 typedef PtrToNode Position;
 
@@ -26,7 +26,7 @@ void ssl_visitNode(ElementType data);
 
 void ssl_TraverseList(List header, void(*print)(ElementType));
 
-bool ssl_isListEmpty(List header);
+bool ssl_isEmpty(List header);
 
 int ssl_GetLen(List header);
 

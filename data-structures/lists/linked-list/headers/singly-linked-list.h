@@ -24,20 +24,20 @@ void ssl_DestroyList(Position *p);
 
 void ssl_ClearList(List header);
 
-Status ssl_InsertNode(ElementType data, List list, int i);
-
-void ssl_visitNode(ElementType data);
-
-void ssl_TraverseList(List header, void(*print)(ElementType));
-
 bool ssl_isEmpty(List header);
 
 int ssl_GetLen(List header);
 
-Position ssl_getNodeAddr(ElementType data, List header);
+Position ssl_getNode(ElementType data, List header);
 
-Position ssl_getPrevNodeAddr(ElementType data, List header);
+Position ssl_getPrevNode(ElementType data, List header);
+
+Status ssl_InsertNode(ElementType data, List list, int i);
 
 void ssl_DeleteNode(ElementType data, List header);
+
+void ssl_visitNode(ElementType data);
+
+void ssl_TraverseList(List header, void(*print)(ElementType));
 
 #endif //ALGORITHMS_ONE_WAY_LINKED_LIST_H

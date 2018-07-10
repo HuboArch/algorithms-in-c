@@ -51,7 +51,10 @@ void ssl_DestroyList(Position *p)
  */
 void ssl_ClearList(List header)
 {
+    Position p = header->next;
+    header->next = NULL;
 
+    ssl_DestroyList(&p);
 }
 
 /**
